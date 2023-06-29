@@ -19,5 +19,8 @@
     "mongodb": "^5.6.0",
     "mongoose": "^7.2.3",
     "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": ">=14 <15"
   }
 }
