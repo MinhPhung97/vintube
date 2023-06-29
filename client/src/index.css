@@ -1,0 +1,56 @@
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Roboto', serif;
+  scroll-behavior: smooth;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+input,
+textarea {
+  outline: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* sweet alert 2 lib */
+body .swal2-popup.swal2-show.swal2-toast.swal2-icon-error,
+body .swal2-popup.swal2-show.swal2-toast.swal2-icon-success {
+  display: flex !important;
+  width: fit-content !important;
+}
+
+/* modal mui lib */
+body .MuiModal-root.css-79ws1d-MuiModal-root {
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
