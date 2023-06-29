@@ -61,17 +61,20 @@ const ProfilePage = () => {
       <Wrapper>
         <Info>
           <Avatar>
-            <img src={currentUser.img} alt="" />
+            <img
+              src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png"
+              alt=""
+            />
           </Avatar>
           <Title>
             <Heading>{currentUser.name}</Heading>
             <Name>{`${currentUser.email}`}</Name>
             <Channel>
               <SpanInfo>
-                <span>{currentUser.subscribers}</span> Subscribers
+                <span>{`${currentUser.subscribers.length} người đăng ký`}</span>
               </SpanInfo>
               <SpanInfo>
-                <span>1010</span> videos
+                <span>{`${videoUpload.length} videos`}</span>
               </SpanInfo>
             </Channel>
           </Title>
