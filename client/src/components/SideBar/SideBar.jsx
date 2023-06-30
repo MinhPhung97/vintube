@@ -81,12 +81,12 @@ function SideBar({ onClose }) {
           {theme ? (
             <>
               <Brightness4Icon />
-              <ItemSpan>Giao diện sáng</ItemSpan>
+              <ItemSpan>Giao diện tối</ItemSpan>
             </>
           ) : (
             <>
               <DarkModeIcon />
-              <ItemSpan>Giao diện tối</ItemSpan>
+              <ItemSpan>Giao diện sáng</ItemSpan>
             </>
           )}
         </Item>
