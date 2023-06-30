@@ -114,14 +114,3 @@ export const Info = styled.div`
   align-items: center;
   margin: 12px 0;
 `;
-
-export const SkeletonWrapper = styled.div`
-  display: flex;
-  flex-direction: ${(props) => (props.type === 'sm' ? 'row' : 'column')};
-`;
-
-export const SkeletonContent = styled.div`
-  display: ${(props) => (props.type === 'sm' ? 'block' : 'flex')};
-`;
-
-export const SkeletonTitle = styled.div``;

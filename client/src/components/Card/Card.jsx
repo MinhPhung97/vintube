@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { channelService } from '~/services/channelService';
 import { format } from 'timeago.js';
 import { Skeleton } from '@mui/material';
+// import 'react-loading-skeleton/dist/skeleton.css';
 
 import {
   Avatar,
@@ -12,8 +13,6 @@ import {
   Heading,
   Img,
   Info,
-  SkeletonContent,
-  SkeletonWrapper,
   Span,
   SpanTime,
   SpanView,
@@ -29,31 +28,41 @@ const Card = ({ type, video }) => {
     const fetchChannel = async () => {
       const res = await channelService.getChannel(video.userId);
       setChannel(res.data);
-      setIsLoading(true);
     };
     fetchChannel();
+    setIsLoading(true);
   }, []);
 
   const renderContent = () => {
     if (type === 'search') {
       return (
         <>
-          <Heading type={type}>{video.title}</Heading>
-          <Info>
-            <Link to={`/profile/${channel._id}`}>
-              <Avatar
-                type={type}
-                src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png"
-                alt=""
-              />
-            </Link>
-            <Link to={`/profile/${channel._id}`}>
-              <ChannelName type={type}>{channel.name}</ChannelName>
-            </Link>
-          </Info>
-          <SpanView>{`${video.views} lượt xem`}</SpanView>
-          <Span />
-          <SpanTime>{format(video.createdAt)}</SpanTime>
+          {isLoading ? (
+            <>
+              <Heading type={type}>{video.title}</Heading>
+              <Info>
+                <Link to={`/profile/${channel._id}`}>
+                  <Avatar
+                    type={type}
+                    src="https://w7.pngwing.com/pngs/831/88/png-transparent-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design-smile-thumbnail.png"
+                    alt=""
+                  />
+                </Link>
+                <Link to={`/profile/${channel._id}`}>
+                  <ChannelName type={type}>{channel.name}</ChannelName>
+                </Link>
+              </Info>
+              <SpanView>{`${video.views} lượt xem`}</SpanView>
+              <Span />
+              <SpanTime>{format(video.createdAt)}</SpanTime>
+            </>
+          ) : (
+            <>
+              <Skeleton animation="wave" height={30} style={{ marginBottom: 4 }} width={400} />
+              <Skeleton animation="wave" height={30} style={{ marginBottom: 4 }} width={400} />
+              <Skeleton animation="wave" height={30} style={{ marginBottom: 4 }} width={400} />
+            </>
+          )}
         </>
       );
     } else {
@@ -67,63 +76,52 @@ const Card = ({ type, video }) => {
             />
           </Link>
           <Title type={type}>
-            <Heading type={type}>{video.title}</Heading>
-            <Link to={`/profile/${channel._id}`}>
-              <ChannelName type={type}>{channel.name}</ChannelName>
-            </Link>
-            <SpanView>{`${video.views} lượt xem`}</SpanView>
-            <Span />
-            <SpanTime>{format(video.createdAt)}</SpanTime>
+            {isLoading ? (
+              <>
+                <Heading type={type}>{video.title}</Heading>
+                <Link to={`/profile/${channel._id}`}>
+                  <ChannelName type={type}>{channel.name}</ChannelName>
+                </Link>
+                <SpanView>{`${video.views} lượt xem`}</SpanView>
+                <Span />
+                <SpanTime>{format(video.createdAt)}</SpanTime>
+              </>
+            ) : (
+              <>
+                <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} width={200} />
+                <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} width={200} />
+                <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} width={200} />
+              </>
+            )}
           </Title>
         </>
       );
     }
   };
 
-  const renderSkeletonLoading = () => {
-    if (type === 'sm') {
-      return (
-        <SkeletonWrapper>
-          <Skeleton sx={{ height: 168 }} animation="wave" variant="rectangular" />
-          <SkeletonContent>
-            <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
-            <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
-            <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
-          </SkeletonContent>
-        </SkeletonWrapper>
-      );
-    } else {
-      return (
-        <SkeletonWrapper>
-          <Skeleton sx={{ height: 168 }} animation="wave" variant="rectangular" />
-          <SkeletonContent>
-            <Skeleton animation="wave" variant="circular" width={40} height={40} />
-            <SkeletonTitle>
-              <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
-              <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
-              <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
-            </SkeletonTitle>
-          </SkeletonContent>
-        </SkeletonWrapper>
-      );
-    }
-  };
-
   return (
-    <>
-      {isLoading ? (
-        <Wrapper type={type}>
-          <Link to={`/video/${video._id}`}>
-            <Header type={type}>
+    <Wrapper type={type}>
+      <Link to={`/video/${video._id}`}>
+        <Header type={type}>
+          {isLoading ? (
+            <>
               <Img type={type} src={video.imgUrl} alt="" />
-            </Header>
-          </Link>
-          <Content type={type}>{renderContent()}</Content>
-        </Wrapper>
-      ) : (
-        <>{renderSkeletonLoading}</>
-      )}
-    </>
+            </>
+          ) : (
+            <>
+              <Skeleton
+                sx={{ bgcolor: '#e3e3e3' }}
+                height="100%"
+                width="100%"
+                animation="wave"
+                variant="rectangular"
+              />
+            </>
+          )}
+        </Header>
+      </Link>
+      <Content type={type}>{renderContent()}</Content>
+    </Wrapper>
   );
 };
 
