@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { channelService } from '~/services/channelService';
 import { format } from 'timeago.js';
+import { Skeleton } from '@mui/material';
 
 import {
   Avatar,
@@ -11,6 +12,8 @@ import {
   Heading,
   Img,
   Info,
+  SkeletonContent,
+  SkeletonWrapper,
   Span,
   SpanTime,
   SpanView,
@@ -20,11 +23,13 @@ import {
 
 const Card = ({ type, video }) => {
   const [channel, setChannel] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchChannel = async () => {
       const res = await channelService.getChannel(video.userId);
       setChannel(res.data);
+      setIsLoading(true);
     };
     fetchChannel();
   }, []);
@@ -75,15 +80,50 @@ const Card = ({ type, video }) => {
     }
   };
 
+  const renderSkeletonLoading = () => {
+    if (type === 'sm') {
+      return (
+        <SkeletonWrapper>
+          <Skeleton sx={{ height: 168 }} animation="wave" variant="rectangular" />
+          <SkeletonContent>
+            <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
+            <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
+            <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
+          </SkeletonContent>
+        </SkeletonWrapper>
+      );
+    } else {
+      return (
+        <SkeletonWrapper>
+          <Skeleton sx={{ height: 168 }} animation="wave" variant="rectangular" />
+          <SkeletonContent>
+            <Skeleton animation="wave" variant="circular" width={40} height={40} />
+            <SkeletonTitle>
+              <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
+              <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
+              <Skeleton animation="wave" height={16} style={{ marginBottom: 4 }} />
+            </SkeletonTitle>
+          </SkeletonContent>
+        </SkeletonWrapper>
+      );
+    }
+  };
+
   return (
-    <Wrapper type={type}>
-      <Link to={`/video/${video._id}`}>
-        <Header type={type}>
-          <Img type={type} src={video.imgUrl} alt="" />
-        </Header>
-      </Link>
-      <Content type={type}>{renderContent()}</Content>
-    </Wrapper>
+    <>
+      {isLoading ? (
+        <Wrapper type={type}>
+          <Link to={`/video/${video._id}`}>
+            <Header type={type}>
+              <Img type={type} src={video.imgUrl} alt="" />
+            </Header>
+          </Link>
+          <Content type={type}>{renderContent()}</Content>
+        </Wrapper>
+      ) : (
+        <>{renderSkeletonLoading}</>
+      )}
+    </>
   );
 };
 

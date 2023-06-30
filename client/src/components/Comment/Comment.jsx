@@ -32,6 +32,9 @@ const Comment = () => {
 
   const isLoading = useSelector((state) => state.commentSlice.isLoading);
 
+  //current video
+  const currentVideo = useSelector((state) => state.videoSlice.currentVideo);
+
   const { id } = useParams();
 
   const fetchDataComment = async () => {
@@ -52,7 +55,7 @@ const Comment = () => {
 
   useEffect(() => {
     fetchDataComment();
-  }, [currentComment?.comment]);
+  }, [currentComment?.comment, currentVideo?._id]);
 
   const handleOnFocus = () => {
     setShowActions(true);

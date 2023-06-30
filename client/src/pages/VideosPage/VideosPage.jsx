@@ -35,6 +35,7 @@ import {
   SkeletonWrapper,
   SpanLike,
   Subscribe,
+  Tags,
   Video,
   VideoWrapper,
   Wrapper,
@@ -260,19 +261,46 @@ const VideosPage = () => {
                 </Actions>
               </Info>
               <Desc>
-                {currentVideo?.desc.split(' ').length > 20 ? (
+                {currentVideo?.desc.split('').length > 200 ? (
                   <>
                     {
                       <p>
-                        {showMore
-                          ? `${currentVideo?.desc}`
-                          : `${currentVideo?.desc.substring(0, 200)}`}
+                        {showMore ? (
+                          <>
+                            <Tags>
+                              {currentVideo?.tags.map((tag) => {
+                                return <span key={tag}>{`#${tag} `}</span>;
+                              })}
+                            </Tags>
+                            {currentVideo?.desc}
+                          </>
+                        ) : (
+                          <>
+                            <Tags>
+                              {currentVideo?.tags.map((tag) => {
+                                return <span key={tag}>{`#${tag} `}</span>;
+                              })}
+                            </Tags>
+                            {currentVideo?.desc.substring(0, 200)}
+                          </>
+                        )}
                       </p>
                     }
                     <ShowMore onClick={handleShowMore}>{showMore ? 'Ẩn bớt' : 'Xem thêm'}</ShowMore>
                   </>
                 ) : (
-                  <>{<p>{currentVideo?.desc}</p>}</>
+                  <>
+                    {
+                      <>
+                        <Tags>
+                          {currentVideo?.tags.map((tag) => {
+                            return <span key={tag}>{`#${tag} `}</span>;
+                          })}
+                        </Tags>
+                        <p>{currentVideo?.desc}</p>
+                      </>
+                    }
+                  </>
                 )}
               </Desc>
             </>

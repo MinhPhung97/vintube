@@ -3,7 +3,7 @@ import { Container, Wrapper } from './DefaultLayoutStyle/DefaultLayoutStyle';
 
 const DefaultLayout = ({ Component }) => {
   return (
-    <Wrapper>
+    <Wrapper id="app">
       <Container>
         <Header />
         {Component}

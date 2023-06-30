@@ -44,7 +44,7 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   display: ${(props) => (props.type === 'search' ? 'block' : 'flex')};
-  /* margin: ${(props) => (props.type === 'sm' ? '0' : '0px 0')};  */
+  margin-left: ${(props) => (props.type === 'search' ? '12px' : '0')};
 
   @media (max-width: 767px) {
     padding: 0 8px;
@@ -67,7 +67,6 @@ export const Title = styled.div`
 
 export const ChannelName = styled.div`
   font-size: ${(props) => (props.type === 'sm' ? '14px' : '16px')};
-  margin: ${(props) => (props.type === 'sm' ? '8px 0' : '2px 0')};
   color: ${({ theme }) => theme.text};
 
   &:hover {
@@ -103,7 +102,7 @@ export const Heading = styled.h3`
   font-size: ${(props) => (props.type === 'sm' ? '16px' : '20px')};
   color: ${({ theme }) => theme.color};
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -115,3 +114,14 @@ export const Info = styled.div`
   align-items: center;
   margin: 12px 0;
 `;
+
+export const SkeletonWrapper = styled.div`
+  display: flex;
+  flex-direction: ${(props) => (props.type === 'sm' ? 'row' : 'column')};
+`;
+
+export const SkeletonContent = styled.div`
+  display: ${(props) => (props.type === 'sm' ? 'block' : 'flex')};
+`;
+
+export const SkeletonTitle = styled.div``;

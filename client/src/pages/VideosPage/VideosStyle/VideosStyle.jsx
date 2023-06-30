@@ -195,6 +195,14 @@ export const SkeletonInfo = styled.div`
   }
 `;
 
+export const Tags = styled.div`
+  margin-bottom: 8px;
+
+  & span {
+    color: #065fd4;
+  }
+`;
+
 export const SkeletonAction = styled.div`
   display: flex;
   gap: 10px;

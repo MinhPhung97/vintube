@@ -17,7 +17,6 @@ import {
 } from './CommentItemStyle/CommentItemStyle';
 import { channelService } from '../../services/channelService';
 import { format } from 'timeago.js';
-import { useDispatch, useSelector } from 'react-redux';
 import { Menu, MenuItem } from '@mui/material';
 import { commentService } from '../../services/commentService';
 import Swal from 'sweetalert2';
@@ -26,12 +25,8 @@ const CommentItem = ({ comment, fetchDataComment }) => {
   const [showMore, setShowMore] = useState(false);
   const [channel, setChannel] = useState({});
   //menu
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  const currentUser = useSelector((state) => state.userSlice.currentUser);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {

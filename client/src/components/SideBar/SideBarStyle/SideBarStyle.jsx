@@ -6,31 +6,11 @@ export const Wrapper = styled.div`
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
 `;
 
 export const Container = styled.div`
   padding: 0 16px;
-  overflow-y: hidden;
-
-  &:hover {
-    overflow-y: scroll;
-  }
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    display: block;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: ${({ theme }) => theme.bg};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.colorScrollBar};
-  }
 `;
 
 export const Logo = styled.div`
