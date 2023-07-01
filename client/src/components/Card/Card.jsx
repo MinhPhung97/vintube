@@ -34,7 +34,9 @@ const Card = ({ type, video }) => {
     if (type === 'search') {
       return (
         <>
-          <Heading type={type}>{video.title}</Heading>
+          <Link to={`/video/${video._id}`}>
+            <Heading type={type}>{video.title}</Heading>
+          </Link>
           <Info>
             <Link to={`/profile/${channel._id}`}>
               <Avatar
@@ -63,7 +65,9 @@ const Card = ({ type, video }) => {
             />
           </Link>
           <Title type={type}>
-            <Heading type={type}>{video.title}</Heading>
+            <Link to={`/video/${video._id}`}>
+              <Heading type={type}>{video.title}</Heading>
+            </Link>
             <Link to={`/profile/${channel._id}`}>
               <ChannelName type={type}>{channel.name}</ChannelName>
             </Link>
