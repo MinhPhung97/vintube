@@ -22,7 +22,7 @@ export const videoService = {
   },
 
   getVideoUserUpload: (userId) => {
-    return https.get(`/video/user/${userId}`);
+    return https.get(`/video/user-upload/${userId}`);
   },
 
   updateViewVideo: (videoId) => {

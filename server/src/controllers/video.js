@@ -185,7 +185,7 @@ const searchVideo = async (req, res, next) => {
 //lấy danh sách video của user đăng
 const getVideoListUser = async (req, res, next) => {
   try {
-    const userId = req.user.id;
+    const { userId } = req.params;
 
     const videos = await Video.find({ userId });
 

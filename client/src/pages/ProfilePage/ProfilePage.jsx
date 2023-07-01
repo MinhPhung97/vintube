@@ -2,6 +2,8 @@ import { Tab, Tabs } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import React, { useEffect, useState } from 'react';
 import Card from '~/components/Card/Card.jsx';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
+
 import {
   Avatar,
   Channel,
@@ -9,6 +11,7 @@ import {
   Heading,
   Info,
   Name,
+  PrivateTab,
   SpanInfo,
   TabsContent,
   TabsHeading,
@@ -16,19 +19,31 @@ import {
   Wrapper,
 } from './ProfilePageStyle/ProfilePageStyle';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { videoService } from '../../services/videoService';
+import { channelService } from '../../services/channelService';
 
 const ProfilePage = () => {
   const [videoUpload, setVideoUpload] = useState([]);
   const [videoLiked, setVideoLiked] = useState([]);
+  const [channel, setChannel] = useState({});
+
+  //current user
   const currentUser = useSelector((state) => state.userSlice.currentUser);
 
+  //current channel
+  var currentChannel = useParams();
+
+  //current tab
   const [currentTabIndex, setCurrentTabIndex] = useState('1');
 
   const fetchVideoUserUpload = async () => {
-    const res = await videoService.getVideoUserUpload(currentUser._id);
-    const newList = res.data;
+    const videoRes = await videoService.getVideoUserUpload(currentChannel.id);
+    const channelRes = await channelService.getChannel(currentChannel.id);
+
+    const newList = videoRes.data;
     setVideoUpload(newList.reverse());
+    setChannel(channelRes.data);
   };
 
   const fetchVideoUserLike = async () => {
@@ -39,8 +54,10 @@ const ProfilePage = () => {
 
   useEffect(() => {
     fetchVideoUserUpload();
-  }, []);
+    fetchVideoUserLike();
+  }, [currentChannel.id]);
 
+  //tab
   const handleChangeTabIndex = (e, tabIndex) => {
     switch (tabIndex) {
       case '1':
@@ -67,14 +84,14 @@ const ProfilePage = () => {
             />
           </Avatar>
           <Title>
-            <Heading>{currentUser.name}</Heading>
-            <Name>{`${currentUser.email}`}</Name>
+            <Heading>{channel?.name}</Heading>
+            <Name>{`${channel?.email}`}</Name>
             <Channel>
               <SpanInfo>
-                <span>{`${currentUser.subscribers.length} người đăng ký`}</span>
+                <span>{`${channel?.subscribers?.length} người đăng ký`}</span>
               </SpanInfo>
               <SpanInfo>
-                <span>{`${videoUpload.length} videos`}</span>
+                <span>{`${videoUpload?.length} videos`}</span>
               </SpanInfo>
             </Channel>
           </Title>
@@ -94,12 +111,20 @@ const ProfilePage = () => {
                 })}
               </TabsContent>
             </TabPanel>
+
             <TabPanel value="2">
-              <TabsContent>
-                {videoLiked.map((video) => {
-                  return <Card video={video} key={video._id} />;
-                })}
-              </TabsContent>
+              {currentChannel.id === currentUser?._id ? (
+                <TabsContent>
+                  {videoLiked.map((video) => {
+                    return <Card video={video} key={video._id} />;
+                  })}
+                </TabsContent>
+              ) : (
+                <PrivateTab>
+                  <LockPersonIcon />
+                  <span>Các video đang ở chế độ riêng tư.</span>
+                </PrivateTab>
+              )}
             </TabPanel>
           </TabContext>
         </Content>

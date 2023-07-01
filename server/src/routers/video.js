@@ -52,7 +52,7 @@ videoRouter.get('/tags', getTags);
 videoRouter.get('/search', searchVideo);
 
 //video của user
-videoRouter.get('/user/:userId', verifyToken, getVideoListUser);
+videoRouter.get('/user-upload/:userId', verifyToken, getVideoListUser);
 
 //video like của user
 videoRouter.get('/list-like', verifyToken, getVideoUserLike);

@@ -74,3 +74,21 @@ export const TabsContent = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 `;
+
+export const PrivateTab = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    font-size: 80px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 767px) {
+    & svg {
+      font-size: 40px;
+    }
+  }
+`;
