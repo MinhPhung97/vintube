@@ -21,3 +21,14 @@ export const Container = styled.div`
     padding: 0;
   }
 `;
+
+export const SkeletonWrapper = styled.div``;
+
+export const SkeletonContent = styled.div`
+  display: flex;
+  margin-top: 8px;
+`;
+
+export const SkeletonTitle = styled.div`
+  margin-left: 12px;
+`;
