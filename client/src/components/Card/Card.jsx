@@ -20,9 +20,8 @@ import {
   Wrapper,
 } from './CardStyle/CardStyle';
 
-const Card = ({ type, video }) => {
+const Card = ({ type, video, isLoading }) => {
   const [channel, setChannel] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchChannel = async () => {
@@ -30,7 +29,6 @@ const Card = ({ type, video }) => {
       setChannel(res.data);
     };
     fetchChannel();
-    setIsLoading(true);
   }, []);
 
   const renderContent = () => {

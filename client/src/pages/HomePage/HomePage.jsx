@@ -7,13 +7,15 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 const HomePage = ({ type }) => {
   const [videos, setVideos] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
   const currentUser = useSelector((state) => state.userSlice.currentUser);
 
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await videoService.getVideoList(type);
-
       setVideos(res.data);
+      setIsLoading(true);
     };
     fetchVideos();
   }, [type]);
@@ -26,7 +28,7 @@ const HomePage = ({ type }) => {
         <Wrapper>
           <Container>
             {videos?.map((video) => {
-              return <Card video={video} key={video._id} />;
+              return <Card video={video} key={video._id} isLoading={isLoading} />;
             })}
           </Container>
         </Wrapper>
