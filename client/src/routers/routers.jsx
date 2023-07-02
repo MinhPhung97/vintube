@@ -42,13 +42,13 @@ const routers = [
   //sign in
   {
     path: '/sign-in',
-    component: <SignInPage />,
+    component: <DefaultLayout Component={<SignInPage />} />,
   },
 
   //sign up
   {
     path: '/sign-up',
-    component: <SignUpPage />,
+    component: <DefaultLayout Component={<SignUpPage />} />,
   },
 
   //search video
