@@ -6,14 +6,14 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f5f7f9;
+  background-color: ${({ theme }) => theme.bg};
 `;
 
 export const Container = styled.div`
   padding: 32px 24px;
   background-color: #fff;
   border-radius: 8px;
-  width: auto;
+  width: 350px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
   & h2 {
