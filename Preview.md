@@ -31,3 +31,5 @@ Công nghệ:
 Link:
 -Demo: https://marvelous-faun-38a45f.netlify.app
 -Github: https://github.com/MinhPhung97/vintube
+
+\*NOTE: vì là tôi đang sử dụng server deploy free nên thời gian load lúc đầu có thể hơi lâu một chút, khoảng 40s. Mong mọi người hãy kiên nhẫn. Xin cảm ơn!
